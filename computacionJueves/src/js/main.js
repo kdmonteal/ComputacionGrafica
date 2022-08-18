@@ -25,11 +25,17 @@ function start() {
     animate();
 }
 
+function onWindowResize(){
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+}
+
 function initScene() {
     // Scene, Camera, Renderer
     // Create Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x350088);
+    scene.background = new THREE.Color(0x000);
     // Create Camera 3D
     camera = new THREE.PerspectiveCamera( 75, // FOV (FIELD OF VIEW)
                                           window.innerWidth / window.innerHeight, //(ASPECT)
@@ -44,11 +50,10 @@ function initScene() {
     scene.add(camera);
     // Controls
     controls = new THREE.OrbitControls( camera, renderer.domElement );
-    camera.position.set(2,2,0);
+    camera.position.set(2,2.5,0);
     controls.update();
-    const size = 10;
-    const divisions = 10;
-
+    const size = 30;
+    const divisions = 30;
     const gridHelper = new THREE.GridHelper( size, divisions );
     scene.add( gridHelper );
     // ***********************************************
@@ -61,6 +66,7 @@ function initScene() {
     camera.position.z = 5;
     // ***********************************************
     // ***********************************************
+    window.addEventListener( 'resize', onWindowResize, false );
 }
 
 function animate() {
