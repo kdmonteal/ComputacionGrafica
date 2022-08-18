@@ -56,25 +56,18 @@ function initScene() {
     const divisions = 30;
     const gridHelper = new THREE.GridHelper(size, divisions);
     scene.add(gridHelper);
-    // // ***********************************************
-    // // ***********************************************
-    // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    // cube = new THREE.Mesh( geometry, material );
-    // scene.add( cube );
-
-    // camera.position.z = 5;
-    // // ***********************************************
-    // // ***********************************************
+    
     window.addEventListener('resize', onWindowResize, false);
 }
 function getValues(object2create) {
     let datas = document.querySelectorAll('input');
-    alert(datas[3].value);
 
     switch (object2create) {
         case 'Box':
-            // code block
+            const geometry = new THREE.BoxGeometry( datas[0].value, datas[1].value, datas[2].value );
+            const material = new THREE.MeshBasicMaterial( { color: datas[3].value } );
+            cube = new THREE.Mesh( geometry, material );
+            scene.add( cube );          
             break;
         case 'Cylinder':
             // code block
