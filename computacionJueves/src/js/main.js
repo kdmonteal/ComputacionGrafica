@@ -25,55 +25,70 @@ function start() {
     animate();
 }
 
-function onWindowResize(){
+function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function initScene() {
     // Scene, Camera, Renderer
     // Create Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000);
+    scene.background = new THREE.Color(0x3293F5);
     // Create Camera 3D
-    camera = new THREE.PerspectiveCamera( 75, // FOV (FIELD OF VIEW)
-                                          window.innerWidth / window.innerHeight, //(ASPECT)
-                                          0.1, // (NEAR)
-                                          1000 );  // (FAR)
+    camera = new THREE.PerspectiveCamera(75, // FOV (FIELD OF VIEW)
+        window.innerWidth / window.innerHeight, //(ASPECT)
+        0.1, // (NEAR)
+        1000);  // (FAR)
     // To Render
     const canvas = document.querySelector('.webgl');
-    renderer = new THREE.WebGLRenderer({canvas:canvas});
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    document.body.appendChild( renderer.domElement ); 
+    renderer = new THREE.WebGLRenderer({ canvas: canvas });
+    renderer.setSize((window.innerWidth - 1), (window.innerHeight - 67));
+    document.body.appendChild(renderer.domElement);
     // Add elements
     scene.add(camera);
     // Controls
-    controls = new THREE.OrbitControls( camera, renderer.domElement );
-    camera.position.set(2,2.5,0);
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    camera.position.set(2, 2.5, 0);
     controls.update();
     const size = 30;
     const divisions = 30;
-    const gridHelper = new THREE.GridHelper( size, divisions );
-    scene.add( gridHelper );
-    // ***********************************************
-    // ***********************************************
-    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    cube = new THREE.Mesh( geometry, material );
-    scene.add( cube );
+    const gridHelper = new THREE.GridHelper(size, divisions);
+    scene.add(gridHelper);
+    // // ***********************************************
+    // // ***********************************************
+    // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    // cube = new THREE.Mesh( geometry, material );
+    // scene.add( cube );
 
-    camera.position.z = 5;
-    // ***********************************************
-    // ***********************************************
-    window.addEventListener( 'resize', onWindowResize, false );
+    // camera.position.z = 5;
+    // // ***********************************************
+    // // ***********************************************
+    window.addEventListener('resize', onWindowResize, false);
 }
+function getValues(object2create) {
+    let datas = document.querySelectorAll('input');
+    alert(datas[3].value);
 
+    switch (object2create) {
+        case 'Box':
+            // code block
+            break;
+        case 'Cylinder':
+            // code block
+            break;
+        case 'Cylinder':
+            // code block
+            break;
+    }
+}
 function animate() {
-    requestAnimationFrame( animate );
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    requestAnimationFrame(animate);
+    // cube.rotation.x += 0.01;
+    // cube.rotation.y += 0.01;
     // required if controls.enableDamping or controls.autoRotate are set to true
-	controls.update();
-    renderer.render(scene,camera);
+    controls.update();
+    renderer.render(scene, camera);
 }

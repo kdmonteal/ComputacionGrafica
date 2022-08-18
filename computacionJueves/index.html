@@ -18,7 +18,7 @@
 </head>
 
 <body onload="start()">
-    <canvas class="webgl"></canvas>
+    <canvas width="800" height="600" class="webgl"></canvas>
     <nav class="navbar bg-light">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -27,17 +27,40 @@
 
             <ul class="nav justify-content-end">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Create Objects</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Create Objects</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Box</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#BoxModal">Box</a></li>
                         <li><a class="dropdown-item" href="#">Cylinder</a></li>
                         <li><a class="dropdown-item" href="#">Sphere</a></li>
                     </ul>
                 </li>
-                
+
             </ul>
         </div>
     </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="BoxModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="BoxModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="BoxModalLabel">Create Cube</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control mb-3" type="number" name="ancho" id="ancho" placeholder="x (Ancho)">
+                    <input class="form-control mb-3" type="number" name="alto" id="alto" placeholder="y (Alto)">
+                    <input class="form-control mb-3" type="number" name="profundidad" id="profundidad" placeholder="z (Profundidad)">
+                    <input class="form-control mb-3" type="color" name="color" id="color">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" onclick="getValues()" class="btn btn-primary" data-bs-dismiss="modal">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- JS bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
