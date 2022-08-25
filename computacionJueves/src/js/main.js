@@ -18,7 +18,10 @@ var scene = null,    // The composition of diferents elements
     renderer = null, // Let me represent with digital image
     controls = null; // Can movements
 
-var cube = null;
+var cube = null,
+    myObject = null,
+    geometry = null,
+    countFigures = 0;
 
 function start() {
     initScene();
@@ -50,7 +53,7 @@ function initScene() {
     scene.add(camera);
     // Controls
     controls = new THREE.OrbitControls(camera, renderer.domElement);
-    camera.position.set(2, 2.5, 0);
+    camera.position.set(10, 15, 10);
     controls.update();
     const size = 30;
     const divisions = 30;
@@ -61,21 +64,45 @@ function initScene() {
 }
 function getValues(object2create) {
     let datas = document.querySelectorAll('input');
-
+    
     switch (object2create) {
         case 'Box':
-            const geometry = new THREE.BoxGeometry( datas[0].value, datas[1].value, datas[2].value );
-            const material = new THREE.MeshBasicMaterial( { color: datas[3].value } );
-            cube = new THREE.Mesh( geometry, material );
-            scene.add( cube );          
+            geometry = new THREE.BoxGeometry( datas[0].value, datas[1].value, datas[2].value );       
             break;
         case 'Cylinder':
-            // code block
+            geometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
             break;
-        case 'Cylinder':
-            // code block
+        case 'Sphere':
+            geometry = new THREE.SphereGeometry( 15, 32, 16 );
             break;
     }
+    const material = new THREE.MeshBasicMaterial( { color: datas[3].value } );
+    myObject = new THREE.Mesh( geometry, material );
+    scene.add( myObject ); 
+    countFigures++;
+    
+    if(countFigures>0){
+        document.getElementById('trans').className = "dropdown-item";
+        document.getElementById('rotate').className = "dropdown-item";
+        document.getElementById('scale').className = "dropdown-item";
+        document.getElementById('myColor').className = "dropdown-item";
+    }
+}
+function transformations(myTransformations) {
+    switch (myTransformations) {
+        case 'Translate':
+            break;
+        case 'Rotate':
+            break;
+        case 'Scale':
+            break;
+        case 'ChangeColor':
+            myObject.material.color.set(0xFF00FF);
+            break;
+    }
+}
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 function animate() {
     requestAnimationFrame(animate);

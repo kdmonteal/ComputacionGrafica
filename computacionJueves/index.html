@@ -31,11 +31,20 @@
                         aria-expanded="false">Create Objects</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#BoxModal">Box</a></li>
-                        <li><a class="dropdown-item" href="#">Cylinder</a></li>
-                        <li><a class="dropdown-item" href="#">Sphere</a></li>
+                        <li><a class="dropdown-item" onclick="getValues('Cylinder')">Cylinder</a></li>
+                        <li><a class="dropdown-item" onclick="getValues('Sphere')">Sphere</a></li>
                     </ul>
                 </li>
-
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Transforms/Modifications</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item disabled" id="trans" href="#">Translate</a></li>
+                        <li><a class="dropdown-item disabled" id="rotate" href="#">Rotate</a></li>
+                        <li><a class="dropdown-item disabled" id="scale" href="#">Scale</a></li>
+                        <li><a class="dropdown-item disabled" id="myColor" onclick="transformations('ChangeColor')">Change color</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
@@ -49,10 +58,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input class="form-control mb-3" type="number" name="ancho" id="ancho" placeholder="x (Ancho)">
-                    <input class="form-control mb-3" type="number" name="alto" id="alto" placeholder="y (Alto)">
-                    <input class="form-control mb-3" type="number" name="profundidad" id="profundidad" placeholder="z (Profundidad)">
-                    <input class="form-control mb-3" type="color" name="color" id="color">
+                    <div class="container text-center">
+                        <div class="row">
+                          <div class="col">
+                            <input class="form-control mb-3" type="number" name="ancho" id="ancho" placeholder="x (Ancho)">
+                          </div>
+                          <div class="col">
+                            <input class="form-control mb-3" type="number" name="alto" id="alto" placeholder="y (Alto)">
+                          </div>
+                          <div class="col">
+                            <input class="form-control mb-3" type="number" name="profundidad" id="profundidad" placeholder="z (Profundidad)">
+                          </div>
+                        </div>
+                        <input class="form-control mb-3" type="color" name="color" id="color">
+                      </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
