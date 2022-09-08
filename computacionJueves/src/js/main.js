@@ -1,7 +1,7 @@
 /*
     Author(a): Kelly Daniella Marin
     Date of creation: 11 August/2022
-    Last Modification: 11/August/2022 - 10:24 AM
+    Last Modification: 08/september/2022 - 10:24 AM
  */
 
 // All elements that I Can create of THREE JS
@@ -19,6 +19,7 @@ var scene = null,    // The composition of diferents elements
     controls = null; // Can movements
 
 var cube = null,
+    cube4 = null,
     myObject = null,
     geometry = null,
     countFigures = 0;
@@ -53,14 +54,67 @@ function initScene() {
     scene.add(camera);
     // Controls
     controls = new THREE.OrbitControls(camera, renderer.domElement);
-    camera.position.set(10, 15, 10);
+    camera.position.set(0, 20, 1);
     controls.update();
-    const size = 30;
-    const divisions = 30;
-    const gridHelper = new THREE.GridHelper(size, divisions);
-    scene.add(gridHelper);
     
     window.addEventListener('resize', onWindowResize, false);
+
+    // *************************** Lights ***************************
+    const light = new THREE.AmbientLight( 0x404040,1); // soft white light
+    scene.add( light );
+
+    const pointLight = new THREE.PointLight( 0xfff, 1, 100 );
+    pointLight.position.set( 0, 0, 0);
+    scene.add( pointLight );
+
+    const sphereSize = 1;
+    const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+    scene.add( pointLightHelper );
+    
+
+    createObjectWithMaterials();
+    // **************************************************************
+}
+function createObjectWithMaterials() {
+    //const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
+
+
+    // MeshStandardMaterial
+    /*const material = new THREE.MeshStandardMaterial({ color: 0xff00ff,
+                                                      roughness:0.2,
+                                                      metalness:0.6,
+                                                      map: new THREE.TextureLoader().load('./src/img/uv_test_bw_1024.png')
+                                                    });                                               
+                                            */
+    //const torusKnot = new THREE.Mesh( geometry, material );
+    //scene.add( torusKnot );
+
+    // MeshBasicMaterial
+    const material = new THREE.MeshBasicMaterial( { transparent: true,
+                                                    opacity: 1,
+                                                    map: new THREE.TextureLoader().load('./src/img/uv_test_bw_1024.png') } );
+    
+    var materialCube = [ new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./src/img/face1.jpg')}),
+                         new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./src/img/face2.png')}),
+                         new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./src/img/face3.jpg')}),
+                         new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./src/img/face4.jpg')}),
+                         new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./src/img/face5.png')}),
+                         new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./src/img/face6.jpg')})
+    ];
+
+    const materialFaces = new THREE.MeshFaceMaterial(materialCube);
+
+    const geometry3 = new THREE.BoxGeometry( 5, 5, 5 );
+    cube = new THREE.Mesh( geometry3, material );
+
+    cube.position.set(6,5,0);
+    scene.add( cube );
+
+    const geometry4 = new THREE.BoxGeometry( 5, 5, 5 );
+    cube4 = new THREE.Mesh( geometry4, materialFaces );
+
+    cube4.position.set(-6,5,0);
+    scene.add( cube4 );
 }
 function getValues(object2create) {
     let datas = document.querySelectorAll('input');
@@ -106,8 +160,12 @@ function getRndInteger(min, max) {
 }
 function animate() {
     requestAnimationFrame(animate);
-    // cube.rotation.x += 0.01;
-    // cube.rotation.y += 0.01;
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    cube4.rotation.x += 0.01;
+    cube4.rotation.y += 0.01;
+
     // required if controls.enableDamping or controls.autoRotate are set to true
     controls.update();
     renderer.render(scene, camera);
