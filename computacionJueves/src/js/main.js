@@ -76,18 +76,17 @@ function initScene() {
     // **************************************************************
 }
 function createObjectWithMaterials() {
-    //const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
+    const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
 
 
     // MeshStandardMaterial
-    /*const material = new THREE.MeshStandardMaterial({ color: 0xff00ff,
+    const material54 = new THREE.MeshStandardMaterial({ color: 0xff00ff,
                                                       roughness:0.2,
-                                                      metalness:0.6,
-                                                      map: new THREE.TextureLoader().load('./src/img/uv_test_bw_1024.png')
+                                                      metalness:0.6
                                                     });                                               
-                                            */
-    //const torusKnot = new THREE.Mesh( geometry, material );
-    //scene.add( torusKnot );
+                                        
+    const torusKnot = new THREE.Mesh( geometry, material54 );
+    scene.add( torusKnot );
 
     // MeshBasicMaterial
     const material = new THREE.MeshBasicMaterial( { transparent: true,
