@@ -78,6 +78,9 @@ function initScene() {
     var fileObjG     = "soldado.vox.obj";        // Name of OBJ file extension
     var fileMtlG     = "soldado.vox.mtl";        // Name of MTL file extension
 
+    // To load the Texture of MTL file extension
+    var mtlLoader = new THREE.MTLLoader();
+
     // To load the geometry of OBJ file extension
     var objLoader = new THREE.OBJLoader();
         objLoader.setPath(generalPathG);
