@@ -71,7 +71,22 @@ function initScene() {
     const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
     scene.add( pointLightHelper );
     // **************************************************************
-}
+
+
+    /* TO DELETE */
+    var generalPathG = "./src/models/guerrero/"; // Path of folder
+    var fileObjG     = "soldado.vox.obj";        // Name of OBJ file extension
+    var fileMtlG     = "soldado.vox.mtl";        // Name of MTL file extension
+
+    // To load the geometry of OBJ file extension
+    var objLoader = new THREE.OBJLoader();
+        objLoader.setPath(generalPathG);
+        objLoader.load(fileObjG, function (object) {
+            scene.add(object);
+            object.scale.set(1,1,1);
+            console.log("load model");
+        });
+    }
 
 function animate() {
     requestAnimationFrame(animate);
