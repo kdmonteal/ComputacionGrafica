@@ -18,6 +18,8 @@ var scene = null,    // The composition of diferents elements
     renderer = null, // Let me represent with digital image
     controls = null; // Can movements
 
+var pointLight = null;
+
 function start() {
     initScene();
     createUI();
@@ -68,7 +70,7 @@ function initScene() {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     //scene.add( directionalLight );
 
-    const pointLight = new THREE.PointLight(0xffffff, 1, 500);
+    pointLight = new THREE.PointLight(0xffffff, 1, 500);
     pointLight.position.set(2, 5, 3);
     scene.add(pointLight);
 
@@ -141,7 +143,8 @@ function createUI() {
     
     var colorGuiLight = gui.addFolder('Light').addColor(param,'b').name("Color light");
     colorGuiLight.onChange(function (colorGet) {
-        console.log("chanfe color: "+colorGet); 
+        console.log("change color: "+colorGet); 
+        pointLight.color.setHex(Number(colorGet.toString().replace('#', '0x')));
     });
 }
 
