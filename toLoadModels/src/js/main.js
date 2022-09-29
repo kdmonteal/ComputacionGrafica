@@ -131,7 +131,8 @@ function createUI() {
             b: "#ff00ff",
             c: "Idle",
             d: true,
-            e: "Voxel Player"
+            e: "Voxel Player",
+            f: 1
     };
 
     var g = gui.addFolder('Geometry');
@@ -141,10 +142,17 @@ function createUI() {
 
     gui.addFolder('Animations').add(param,'c', ["Idle", "Run", "Jump"]).name("Animation Player");
     
-    var colorGuiLight = gui.addFolder('Light').addColor(param,'b').name("Color light");
+    var c = gui.addFolder('Light');
+    var colorGuiLight = c.addColor(param,'b').name("Color light");
+    var colorIntensity = c.add(param,'f').min(0).max(1).step(0.1).name("Intensity Light");
+
     colorGuiLight.onChange(function (colorGet) {
         console.log("change color: "+colorGet); 
         pointLight.color.setHex(Number(colorGet.toString().replace('#', '0x')));
+    });
+
+    colorIntensity.onChange(function (intensityLight) {
+        pointLight.intensity = intensityLight;
     });
 }
 
