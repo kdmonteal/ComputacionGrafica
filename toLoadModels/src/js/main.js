@@ -63,7 +63,7 @@ function initScene() {
     const light = new THREE.AmbientLight( 0x404040,1); // soft white light
     scene.add( light );
 
-    const pointLight = new THREE.PointLight( 0xfff, 1, 100 );
+    const pointLight = new THREE.PointLight( 0xffffff, 1, 100 );
     pointLight.position.set( 0, 0, 0);
     scene.add( pointLight );
 
@@ -71,23 +71,27 @@ function initScene() {
     const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
     scene.add( pointLightHelper );
     // **************************************************************
-
-
     /* TO DELETE */
-    var generalPathG = "./src/models/guerrero/"; // Path of folder
+    var generalPathG = "./src/models/obj/guerrero/"; // Path of folder
     var fileObjG     = "soldado.vox.obj";        // Name of OBJ file extension
     var fileMtlG     = "soldado.vox.mtl";        // Name of MTL file extension
 
     // To load the Texture of MTL file extension
     var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setTexturePath(generalPathG);
+        mtlLoader.setPath(generalPathG);
+        mtlLoader.load(fileMtlG, function (materials) {
+            materials.preload();
 
-    // To load the geometry of OBJ file extension
-    var objLoader = new THREE.OBJLoader();
-        objLoader.setPath(generalPathG);
-        objLoader.load(fileObjG, function (object) {
-            scene.add(object);
-            object.scale.set(1,1,1);
-            console.log("load model");
+            // To load the geometry of OBJ file extension
+            var objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.setPath(generalPathG);
+            objLoader.load(fileObjG, function (object) {
+                scene.add(object);
+                object.scale.set(1,1,1);
+                console.log("load model");
+            });
         });
     }
 
